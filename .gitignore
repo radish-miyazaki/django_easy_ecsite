@@ -1,0 +1,6 @@
+.idea/*
+
+db.sqlite3
+
+output/orders/*
+media/product_pictures/*

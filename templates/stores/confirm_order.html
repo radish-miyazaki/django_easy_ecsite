@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+	<p>{{ user.username }}, please confirm to your order.</p>
+	<p>Zip code: {{ address.zip_code }}</p>
+	<p>Prefecture: {{ address.prefecture }}</p>
+	<p>Address: {{ address.address }}</p>
+
+	<table>
+		<tbody>
+			{% for item in items %}
+					<tr>
+						<td style="width: 20%;">
+							{% if item.picture %}
+								<img src="{{ item.picture.url }}" alt="item picture" width="75px" height="75px" />
+							{% endif %}
+						</td>
+						<td style="width: 20%;">
+							{{ item.name }}<br>¥ {{ item.price }}
+						</td>
+						<td style="text-align: right;">
+							Quantity: {{ item.quantity }}
+						</td>
+					</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<hr />
+
+	<p>
+		<a href="{% url 'stores:cart_items' %}">To cart</a>
+	</p>
+	<p>
+		<a href="{% url 'stores:input_address' %}">To input address</a>
+	</p>
+	<h3 class="offset-9">Sum: ¥ {{ total_price }}</h3>
+	<br />
+
+	<form method="post" class="offset-10">
+		{% csrf_token %}
+		<input type="submit" class="btn btn-primary" value="Confirm order" />
+	</form>
+{% endblock %}
